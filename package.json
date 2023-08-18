@@ -1,0 +1,11 @@
+{
+  "name": "playwright-vscode-cwd-issue",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Oliver Joseph Ash <oliverjash@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.37.1"
+  },
+  "scripts": {}
+}
