@@ -1,18 +1,16 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 
 test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await page.goto(
+    `data:text/html;charset=utf-8,${encodeURIComponent(
+      '<input type="file" />'
+    )}`
+  );
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+  const fileChooserPromise = page.waitForEvent('filechooser');
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await page.getByRole('textbox').click();
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+  const fileChooser = await fileChooserPromise;
+  await fileChooser.setFiles('./assets/spacer.gif');
 });
